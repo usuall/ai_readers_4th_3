@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>칭찬 릴레이</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 0 auto; padding: 24px 16px; background: #fdf8f3; color: #333; }
+    h1 { text-align: center; }
+    h2 { font-size: 18px; margin: 0 0 8px; }
+    form, aside, .card { background: #fff; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 1px 4px #0001; }
+    form { display: grid; gap: 8px; }
+    input, textarea, button { font: inherit; padding: 8px; border: 1px solid #ddd; border-radius: 8px; }
+    textarea { resize: vertical; min-height: 80px; }
+    form button { background: #ff7a59; color: #fff; border: 0; cursor: pointer; }
+    form button:disabled { opacity: .5; }
+    #search { width: 100%; box-sizing: border-box; margin-bottom: 16px; }
+    #ranking { margin: 0; }
+    #ranking:empty::after { content: '이번 달 칭찬이 아직 없어요'; color: #888; }
+    #list:empty::after { content: '칭찬이 없어요. 첫 칭찬을 남겨보세요!'; color: #888; }
+    .to { font-weight: bold; margin: 0 0 8px; }
+    .message { white-space: pre-wrap; margin: 0 0 12px; }
+    .card footer { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #888; }
+    .heart { margin-left: auto; background: none; color: #e25563; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>🌷 칭찬 릴레이</h1>
+
+  <form id="praise-form">
+    <input name="to_name" aria-label="받는 사람" placeholder="받는 사람" maxlength="20" required />
+    <input name="from_name" aria-label="보내는 사람" placeholder="보내는 사람 (닉네임 가능)" maxlength="20" required />
+    <textarea name="message" aria-label="칭찬 내용" placeholder="고마웠던 일을 짧게 남겨주세요" maxlength="300" required></textarea>
+    <button>남기기</button>
+  </form>
+
+  <aside>
+    <h2>🏆 이번 달 칭찬왕</h2>
+    <ol id="ranking"></ol>
+  </aside>
+
+  <input id="search" type="search" aria-label="받는 사람 검색" placeholder="받는 사람 이름으로 검색" />
+  <section id="list"></section>
+
+  <template id="card">
+    <article class="card">
+      <p class="to"></p>
+      <p class="message"></p>
+      <footer>
+        <span class="from"></span>
+        <time></time>
+        <button class="heart" aria-label="좋아요">♥ <span></span></button>
+      </footer>
+    </article>
+  </template>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
